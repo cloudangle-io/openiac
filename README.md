@@ -22,7 +22,7 @@ The script will generate tofu files in the local. It will copy all resources und
 
 # YAML
 
-The config yaml is abstracted to a high level making it much easier to developers to build infra with sensible defaults. We will keep allowing more and more flexibility without removing the sensible default layer to avoid unnecessary optimisations. For most applications the defaults should work without any changes eventually.
+The config yaml is abstracted to a high level making it much easier for developers to build infra with sensible defaults. We will keep allowing more and more flexibility without removing the sensible default layer to avoid unnecessary optimisations and out of the box infra. For most applications, the defaults should work without any changes.
 
 ```
 version: 0.1
