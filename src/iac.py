@@ -24,21 +24,26 @@ for s in data["stacks"]:
     provider_name = ''
     provider_version = ''
 
-    # List all providers
     provider_name = data["stacks"][s]["provider"]
     print(f"Provider Name: {provider_name}")
     provider_version = data["stacks"][s]["provider_version"]
     print(f"Provider Version: {provider_version}")
 
-    if "services" in data["stacks"][s]:
-        print("Services:")
-        for service in data["stacks"][s]["services"]:
-            resource_file = OPENIAC_HOME + f"/resources/{provider_name}/{provider_version}/{service['type']}/module.tf" 
-            destination = service['name'] + "_" + os.path.basename(resource_file)
-            shutil.copy(resource_file, destination)
+    for environment in data["stacks"][s]["environment"]:
+        print(f"Environment : {environment}")
+        print(f"Environment : {data['stacks'][s]['environment'][environment]}")
 
-    subprocess.run(["tofu", "validate"])
-    subprocess.run(["tofu", "plan"])
+        
+        if "services" in data["stacks"][s]:
+            print("Services:")
+            for service in data["stacks"][s]["services"]:
+                resource_file = OPENIAC_HOME + f"/resources/{provider_name}/{provider_version}/{service['type']}/module.tf" 
+                destination = service['name'] + "_" + os.path.basename(resource_file)
+                shutil.copy(resource_file, destination)
+
+        subprocess.run(["export AWS_PROFILE=" + data["stacks"][s]["environment"][environment]["profile"]], shell=True)
+        subprocess.run(["tofu", "validate"])
+        subprocess.run(["tofu", "plan"])
 
 
 
