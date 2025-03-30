@@ -33,9 +33,12 @@ stacks:
     provider_version: v1.0
     region: ap-southeast-2
     environment:
-      - dev
-      - test
-      - prod
+      dev:
+        profile: sandbox
+      test:
+        profile: sandbox
+      prod:
+        profile: sandbox
     services:
       - name: test
         type: s3
